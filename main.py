@@ -141,4 +141,4 @@ async def userinfo(ctx, *, member: discord.Member = None):
     embed.add_field(name="Bot", value=member.bot)
     await ctx.send(embed=embed)
   
-client.run()
+client.run("OTM3NjYyMTUwMDQ0OTUwNTk5.Yfe_7Q.mh_11ZLvw35SY7ENlTubfT8Pga4")
