@@ -12,7 +12,7 @@ client = commands.Bot(command_prefix=".", intents=intents)
 today = date.today()
 date = today.strftime("%B %d, %Y")
 day = calendar.day_name[today.weekday()]
-status = cycle(["Stunning Things","Discord","Youtube","Netflix","Twitch","Tiktok","Chrome?"])
+status = cycle(["Stunning Things","Discord","Youtube","Netflix","Twitch","Tiktok","Chrome"])
 
 
 @client.event
@@ -27,7 +27,10 @@ async def change_status():
 
 @client.command()
 async def ping(ctx):
-  await ctx.send('Pong! {0}'.format(round(client.latency, 1)))
+    before = time.monotonic()
+    message = await ctx.send("Pong!")
+    ping = (time.monotonic() - before) * 1000
+    await message.edit(content=f"Pong!  `{int(ping)}ms`")
 
 
 @client.command()
