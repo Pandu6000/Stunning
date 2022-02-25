@@ -25,13 +25,6 @@ async def on_ready():
 async def change_status():
   await client.change_presence(activity=discord.Game(next(status)))
 
-@client.command()
-async def ping(ctx):
-    before = time.monotonic()
-    message = await ctx.send("Pong!")
-    ping = (time.monotonic() - before) * 1000
-    await message.edit(content=f"Pong!  `{int(ping)}ms`")
-
 
 @client.command()
 async def kick(ctx, member : discord.Member, *, reason=None):
