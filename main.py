@@ -4,6 +4,8 @@ from datetime import date
 import calendar
 import random
 from discord.ext import commands, tasks
+import aiohttp
+import asyncio
 from itertools import cycle
 
 intents = discord.Intents.default()  
@@ -137,4 +139,14 @@ async def userinfo(ctx, *, member: discord.Member = None):
     embed.add_field(name="Bot", value=member.bot)
     await ctx.send(embed=embed)
   
+@client.command(pass_context=True)
+async def meme(ctx):
+    embed = discord.Embed(title="", description="")
+
+    async with aiohttp.ClientSession() as cs:
+        async with cs.get('https://www.reddit.com/r/dankmemes/new.json?sort=hot') as r:
+            res = await r.json()
+            embed.set_image(url=res['data']['children'] [random.randint(0, 25)]['data']['url'])
+            await ctx.send(embed=embed)
+
 client.run("OTM3NjYyMTUwMDQ0OTUwNTk5.Yfe_7Q.mh_11ZLvw35SY7ENlTubfT8Pga4")
