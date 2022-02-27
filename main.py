@@ -175,11 +175,11 @@ async def update_data(users, user,server):
         if not str(user.id) in users[str(server.id)]:
             users[str(server.id)][str(user.id)] = {}
             users[str(server.id)][str(user.id)]['experience'] = 0
-            users[str(server.id)][str(user.id)]['level'] = 1
+            users[str(server.id)][str(user.id)]['level'] = 0
     elif not str(user.id) in users[str(server.id)]:
             users[str(server.id)][str(user.id)] = {}
             users[str(server.id)][str(user.id)]['experience'] = 0
-            users[str(server.id)][str(user.id)]['level'] = 1
+            users[str(server.id)][str(user.id)]['level'] = 0
 
 async def add_experience(users, user, exp, server):
   users[str(user.guild.id)][str(user.id)]['experience'] += exp
