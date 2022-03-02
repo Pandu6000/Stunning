@@ -159,6 +159,8 @@ async def balance(ctx):
 
   users = await get_bank_data()
 
+  user = ctx.author
+
 
   wallet_amt = users[str(user.id)]["wallet"]
   bank_amt = users[str(user.id)]["bank"]
