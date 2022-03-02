@@ -170,6 +170,12 @@ async def balance(ctx):
   embed.add_field(name = "Bank", value = bank_amt)
   await ctx.send(embed = embed)
 
+@client.event
+async def on_command_error(ctx,error):
+  if isinstance(error, commands.CommandOnCooldown):
+    msg  = "Hey there Cool down. Dont be notkool."
+    await ctx.send(msg)
+
 @client.command()
 @commands.cooldown(2,30,commands.BucketType.user)
 async def beg(ctx):
