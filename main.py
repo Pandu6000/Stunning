@@ -180,7 +180,7 @@ async def beg(ctx):
 
   earnings = random.randrange(101)
 
-  await ctx.send(f"Someone gave you{earnings} coins!") 
+  await ctx.send(f"Someone gave you {earnings} coins!") 
 
   users[str(user.id)]["wallet"]+=earnings
 
