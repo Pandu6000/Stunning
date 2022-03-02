@@ -171,6 +171,7 @@ async def balance(ctx):
   await ctx.send(embed = embed)
 
 @client.command()
+@commands.cooldown(2,30,commands.BucketType.user)
 async def beg(ctx):
   await open_account(ctx.author)
 
