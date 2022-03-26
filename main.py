@@ -148,7 +148,7 @@ async def userinfo(ctx, *, member: discord.Member = None):
     embed.add_field(name="ID", value=member.id)
     embed.add_field(name="Account created at", value=member.created_at)
     embed.add_field(name="Server Joined at", value=member.joined_at)
-    embed.add_field(name="Bot", value=member.abc)
+    embed.add_field(name="Bot", value=member.bot)
     await ctx.send(embed=embed)
   
 @client.command(pass_context=True)
