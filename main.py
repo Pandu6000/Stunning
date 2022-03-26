@@ -10,6 +10,8 @@ import json
 import random
 from datetime import datetime
 from itertools import cycle
+from discord import Member
+from discord.ext.commands import has_permissions, MissingPermissions
 
 intents = discord.Intents.default()  
 intents.members = True  
