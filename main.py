@@ -29,9 +29,16 @@ async def on_ready():
 @tasks.loop(seconds=20)
 async def change_status():
   await client.change_presence(activity=discord.Game(next(status)))
+  
+@client.event
+async def on_command_error(ctx,error):
+    if isinstance(error, MissingPermissions):
+        text = f"Hey {ctx.author.display_name} Pandu! You need permission for that."
+        await ctx.send(embed = discord.Embed(description = f"{text}"))
 
 
 @client.command()
+@commands.has_permissions(manage_roles=True, ban_members=True)
 async def kick(ctx, member : discord.Member, *, reason=None):
   await member.kick(reason=reason)
   embed = discord.Embed(description=f"{member.name}#{member.discriminator} was kicked", timestamp=ctx.message.created_at)
@@ -39,6 +46,7 @@ async def kick(ctx, member : discord.Member, *, reason=None):
   await ctx.send(embed=embed)
 
 @client.command()
+@commands.has_permissions(ban_members=True)
 async def ban(ctx, member : discord.Member, *, reason=None):
   await member.ban(reason=reason)
   embed = discord.Embed(description = f"{member.name}#{member.discriminator} was kicked.", timestamp = ctx.message.created_at)
@@ -46,6 +54,7 @@ async def ban(ctx, member : discord.Member, *, reason=None):
   await  ctx.send(embed=embed)
 
 @client.command()
+@client.has_permissions(ban_member=True)
 async def unban(ctx, *, member):
   banned_users = await ctx.guild.bans()
   member_name, member_discriminator = member.split("#")
