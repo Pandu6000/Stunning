@@ -34,7 +34,7 @@ async def change_status():
 async def on_command_error(ctx,error):
     if isinstance(error, MissingPermissions):
         text = f"Hey {ctx.author.display_name} Pandu! You need permission for that."
-        await ctx.send(embed = discord.Embed(description = f"{text}"))
+        await ctx.send(text)
 
 
 @client.command()
