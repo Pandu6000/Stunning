@@ -28,14 +28,7 @@ async def on_ready():
 
 @tasks.loop(seconds=20)
 async def change_status():
-  await client.change_presence(activity=discord.Game(next(status)))
-  
-@client.event
-async def on_command_error(ctx,error):
-    if isinstance(error, MissingPermissions):
-        text = f"Hey {ctx.author.display_name} Pandu! You need permission for that."
-        await ctx.send(text)
-
+  await client.change_presence(activity=discord.Game(next(status))
 
 @client.command()
 @commands.has_permissions(manage_roles=True, ban_members=True)
@@ -44,6 +37,13 @@ async def kick(ctx, member : discord.Member, *, reason=None):
   embed = discord.Embed(description=f"{member.name}#{member.discriminator} was kicked", timestamp=ctx.message.created_at)
   embed.set_footer(text=f"By {ctx.author}", icon_url=ctx.author.avatar_url)
   await ctx.send(embed=embed)
+                               
+@kick.error
+async def kick_error(error, ctx):
+    if isinstance(error, MissingPermissions):
+        text = "Sorry {}, you do not have permissions to do that!".format(ctx.message.author)
+        await bot.send_message(ctx.message.channel, text)
+
 
 @client.command()
 @commands.has_permissions(ban_members=True)
