@@ -22,13 +22,11 @@ status = cycle(["Stunning Things","Discord","Youtube","Netflix","Twitch","Tiktok
 
 @client.event
 async def on_ready():
-  change_status.start()
-  await client.change_presence(status=discord.Status.idle)
   print("Bot is ready.")
 
 @tasks.loop(seconds=20)
 async def change_status():
-  await client.change_presence(activity=discord.Game(next(status))
+  await client.change_presence(status=discord.Status.idle, activity=discord.Game(next(status)))
 
 @client.command()
 @commands.has_permissions(manage_roles=True, ban_members=True)
