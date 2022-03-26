@@ -54,7 +54,7 @@ async def ban(ctx, member : discord.Member, *, reason=None):
   await  ctx.send(embed=embed)
 
 @client.command()
-@client.has_permissions(ban_member=True)
+@commands.has_permissions(ban_member=True)
 async def unban(ctx, *, member):
   banned_users = await ctx.guild.bans()
   member_name, member_discriminator = member.split("#")
